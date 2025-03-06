@@ -1,0 +1,56 @@
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*.so
+*.pyo
+
+# Archivos de migraciones de Django
+migrations/
+!migrations/__init__.py
+
+# Base de datos SQLite
+db.sqlite3
+*.sqlite3
+
+# Entorno virtual (venv)
+venv/
+env/
+
+# Archivos de logs y dumps
+*.log
+*.pot
+*.swp
+*.swo
+*.pid
+*.seed
+
+# Configuración y dependencias
+*.pyenv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Archivos del sistema
+.DS_Store
+*.bak
+*.tmp
+*.lock
+
+# Configuración de IDEs y editores
+.vscode/
+.idea/
+*.code-workspace
+
+# Archivos de compilación
+*.egg-info/
+*.eggs/
+dist/
+build/
+
+# Archivos de Odoo (si generas caché u otros temporales)
+odoo/addons/*/__manifest__.pyc
+odoo/addons/*/__pycache__/
+
+# Archivos de Docker (si usas Docker)
+.dockerignore
+docker-compose.override.yml
+
