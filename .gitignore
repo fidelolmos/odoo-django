@@ -17,6 +17,10 @@ db.sqlite3
 venv/
 env/
 
+#Variables de entorno
+.env
+.env.local
+
 # Archivos de logs y dumps
 *.log
 *.pot

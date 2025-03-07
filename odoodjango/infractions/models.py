@@ -1,7 +1,7 @@
 from django.db import models
 
 class Infraction(models.Model):
-    infraction_number = models.CharField(max_length=50, unique=False)  # Número de infracción
+    infraction_number = models.CharField(max_length=50)  # Número de infracción
     date = models.CharField(max_length=20)  # Fecha
     category = models.CharField(max_length=100)  # Categoría
     concept = models.CharField(max_length=255)  # Concepto de infracción
