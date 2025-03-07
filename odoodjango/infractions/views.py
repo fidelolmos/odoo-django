@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Infraction
+from .serializers import InfractionSerializer
 
-# Create your views here.
+class InfractionViewSet(viewsets.ModelViewSet):
+    queryset = Infraction.objects.all()
+    serializer_class = InfractionSerializer
