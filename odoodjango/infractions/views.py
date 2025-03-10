@@ -23,3 +23,13 @@ class InfractionDetailView(generics.RetrieveAPIView):
     """
     queryset = Infraction.objects.all()
     serializer_class = InfractionSerializer
+
+class InfractionByPlateView(generics.ListAPIView):
+    """
+    Endpoint para obtener infracciones filtradas por la placa del vehículo (GET /api/infractions/plate/{vehicle_plate}/)
+    """
+    serializer_class = InfractionSerializer
+
+    def get_queryset(self):
+        plate = self.kwargs['vehicle_plate']
+        return Infraction.objects.filter(vehicle_plate=plate)
