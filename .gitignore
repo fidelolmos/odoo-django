@@ -17,6 +17,10 @@ db.sqlite3
 venv/
 env/
 
+#Variables de entorno
+.env
+.env.local
+
 # Archivos de logs y dumps
 *.log
 *.pot
@@ -52,6 +56,5 @@ odoo/addons/*/__manifest__.pyc
 odoo/addons/*/__pycache__/
 
 # Archivos de Docker (si usas Docker)
-.dockerignore
 docker-compose.override.yml
 

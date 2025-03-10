@@ -20,7 +20,11 @@ def generate_sql_script():
         # Escribimos el encabezado del archivo SQL
         sqlfile.write("BEGIN;\n")  # Iniciar transacción
         
+        count = 0
+
         for row in reader:
+            if count >= 2000:
+                break
             # Eliminar el prefijo "id-" del infraction_number
             infraction_number = row['id_infraccion'].replace("id-", "")
 
@@ -47,10 +51,13 @@ def generate_sql_script():
                 "(infraction_number, date, category, concept, vehicle_plate, brand, model, street, neighborhood, municipality, paid) "
                 "VALUES "
                 f"('{values[0]}', '{values[1]}', '{values[2]}', '{values[3]}', '{values[4]}', '{values[5]}', '{values[6]}', '{values[7]}', '{values[8]}', '{values[9]}', FALSE) "
-                "ON CONFLICT (infraction_number) DO NOTHING;\n"
+                "ON CONFLICT (infraction_number) DO NOTHING "
+                "RETURNING id;\n"
             )
 
+
             sqlfile.write(sql)
+            count += 1
 
         sqlfile.write("COMMIT;\n")  # Confirmar transacción
 

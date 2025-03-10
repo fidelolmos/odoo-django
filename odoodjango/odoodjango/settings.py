@@ -10,11 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
+import dj_database_url
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -79,14 +83,13 @@ WSGI_APPLICATION = 'odoodjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'odoodjango',
-        'USER': 'freddy',
-        'PASSWORD': '2k23R&Fjdn',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv("POSTGRES_DB", "odoodjango"),
+        'USER': os.getenv("POSTGRES_USER", "freddy"),
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD", "2k23R&Fjdn"),
+        'HOST': os.getenv("POSTGRES_HOST", "db"),  # <-- CAMBIA 'localhost' por 'db'
+        'PORT': os.getenv("POSTGRES_PORT", "5432"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
