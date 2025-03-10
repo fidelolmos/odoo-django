@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: odoodjango
+      POSTGRES_USER: freddy
+      POSTGRES_PASSWORD: 2k23R&Fjdn
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    container_name: django_app
+    depends_on:
+      - db
+    environment:
+      POSTGRES_DB: odoodjango
+      POSTGRES_USER: freddy
+      POSTGRES_PASSWORD: 2k23R&Fjdn
+      POSTGRES_HOST: db  # <--- SE AGREGA ESTO
+      POSTGRES_PORT: 5432
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: ["gunicorn", "odoodjango.wsgi:application", "--bind", "0.0.0.0:8000"]
+
+  adminer:
+    image: adminer
+    container_name: adminer_db
+    restart: always
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:

@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'odoodjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'odoodjango',
-        'USER': 'freddy',
-        'PASSWORD': '2k23R&Fjdn',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv("POSTGRES_DB", "odoodjango"),
+        'USER': os.getenv("POSTGRES_USER", "freddy"),
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD", "2k23R&Fjdn"),
+        'HOST': os.getenv("POSTGRES_HOST", "db"),  # <-- CAMBIA 'localhost' por 'db'
+        'PORT': os.getenv("POSTGRES_PORT", "5432"),
     }
 }
 
