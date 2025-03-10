@@ -20,7 +20,11 @@ def generate_sql_script():
         # Escribimos el encabezado del archivo SQL
         sqlfile.write("BEGIN;\n")  # Iniciar transacción
         
+        count = 0
+
         for row in reader:
+            if count >= 2000:
+                break
             # Eliminar el prefijo "id-" del infraction_number
             infraction_number = row['id_infraccion'].replace("id-", "")
 
@@ -53,6 +57,7 @@ def generate_sql_script():
 
 
             sqlfile.write(sql)
+            count += 1
 
         sqlfile.write("COMMIT;\n")  # Confirmar transacción
 
