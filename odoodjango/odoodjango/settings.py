@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'odoodjango',
+    'laws',
+    'vehicles',
+    'locations',
     'infractions',
     'rest_framework',
 ]
