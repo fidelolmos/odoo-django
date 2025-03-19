@@ -58,3 +58,7 @@ odoo/addons/*/__pycache__/
 # Archivos de Docker (si usas Docker)
 docker-compose.override.yml
 
+# Carpetas
+
+lookup_data/
+
