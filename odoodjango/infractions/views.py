@@ -1,35 +1,29 @@
 from rest_framework.response import Response
-from rest_framework import status, generics
-from .models import Infraction
-from .serializers import InfractionSerializer
+from rest_framework.views import APIView
+from rest_framework import status
+from infractions.models import Infraction
+from infractions.serializers import InfractionDetailSerializer
 
-class InfractionListView(generics.ListAPIView):
+class InfractionByPlateView(APIView):
     """
-    Endpoint para obtener todas las infracciones (GET)
+    Endpoint para consultar infracciones por número de placa.
     """
-    queryset = Infraction.objects.all()
-    serializer_class = InfractionSerializer
 
-class InfractionCreateView(generics.CreateAPIView):
-    """
-    Endpoint para crear una nueva infracción (POST)
-    """
-    queryset = Infraction.objects.all()
-    serializer_class = InfractionSerializer
+    def get(self, request, plate):
+        """
+        Retorna todas las infracciones asociadas a la placa proporcionada.
+        """
+        infractions = Infraction.objects.filter(vehicle__plate=plate.upper()).select_related(
+            "vehicle__model__brand",
+            "violation_detail__paragraph__subsection__fraction__article",
+            "location__neighborhood__municipality",
+        )
 
-class InfractionDetailView(generics.RetrieveAPIView):
-    """
-    Endpoint para obtener una infracción por su ID (GET /api/infractions/detail/{id}/)
-    """
-    queryset = Infraction.objects.all()
-    serializer_class = InfractionSerializer
-
-class InfractionByPlateView(generics.ListAPIView):
-    """
-    Endpoint para obtener infracciones filtradas por la placa del vehículo (GET /api/infractions/plate/{vehicle_plate}/)
-    """
-    serializer_class = InfractionSerializer
-
-    def get_queryset(self):
-        plate = self.kwargs['vehicle_plate']
-        return Infraction.objects.filter(vehicle_plate=plate)
+        if infractions.exists():
+            serializer = InfractionDetailSerializer(infractions, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(
+                {"message": "No se encontraron infracciones para esta placa."},
+                status=status.HTTP_404_NOT_FOUND
+            )

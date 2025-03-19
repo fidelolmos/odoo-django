@@ -1,10 +1,6 @@
 from django.urls import path
-from .views import InfractionListView, InfractionCreateView, InfractionDetailView, InfractionByPlateView # Asegúrate de importar InfractionDetailView
-
+from infractions.views import InfractionByPlateView
 
 urlpatterns = [
-    path('infractions/list/', InfractionListView.as_view(), name='infractions-list'),  # GET (Lista todas)
-    path('infractions/create/', InfractionCreateView.as_view(), name='infractions-create'),  # POST (Crear nueva)
-    path('infractions/detail/<int:pk>/', InfractionDetailView.as_view(), name='infractions-detail'),  # GET (Por ID)
-    path('infractions/plate/<str:vehicle_plate>/', InfractionByPlateView.as_view(), name='infractions-by-plate'),
+    path('by-plate/<str:plate>/', InfractionByPlateView.as_view(), name="infraction-by-plate"),
 ]
