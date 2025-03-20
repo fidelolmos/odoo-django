@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ["3.144.101.173", "localhost", "127.0.0.1"]
 
 CSRF_TRUSTED_ORIGINS = ['http://3.144.101.173', 'http://localhost', 'http://127.0.0.1']
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # Application definition
 
 INSTALLED_APPS = [
