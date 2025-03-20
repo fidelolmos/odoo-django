@@ -23,12 +23,12 @@ services:
       POSTGRES_DB: odoodjango
       POSTGRES_USER: freddy
       POSTGRES_PASSWORD: 2k23R&Fjdn
-      POSTGRES_HOST: db  # <--- SE AGREGA ESTO
+      POSTGRES_HOST: db  
       POSTGRES_PORT: 5432
-    ports:
-      - "8000:8000"
     volumes:
       - .:/app
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
     command: ["gunicorn", "odoodjango.wsgi:application", "--bind", "0.0.0.0:8000"]
 
   adminer:
@@ -38,7 +38,6 @@ services:
     ports:
       - "8080:8080"
 
-  
   nginx:
     build:
       context: .
@@ -50,6 +49,9 @@ services:
       - web
     volumes:
       - static_volume:/app/staticfiles
+      - media_volume:/app/media
 
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:
