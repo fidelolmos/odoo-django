@@ -38,5 +38,18 @@ services:
     ports:
       - "8080:8080"
 
+  
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: nginx_proxy
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    volumes:
+      - static_volume:/app/staticfiles
+
 volumes:
   postgres_data:
