@@ -27,10 +27,11 @@ load_dotenv()
 SECRET_KEY = 'django-insecure-4(c3&3o93#lsxpc!zp1rblb0c93rp7cdrh19a-wav6wvmy!44c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["3.145.37.113", "localhost", "127.0.0.1"]
 
+CSRF_TRUSTED_ORIGINS = ['http://3.145.37.113', 'http://localhost', 'http://127.0.0.1']
 
 # Application definition
 
@@ -130,6 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
