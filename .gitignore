@@ -61,4 +61,4 @@ docker-compose.override.yml
 # Carpetas
 
 lookup_data/
-
+staticfiles/
