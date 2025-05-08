@@ -13,6 +13,8 @@ services:
       - "5432:5432" 
     command: >
       postgres -c listen_addresses='*'
+    networks:
+      - shared_network
 
   web:
     build: .
@@ -30,6 +32,8 @@ services:
       - static_volume:/app/staticfiles
       - media_volume:/app/media
     command: ["gunicorn", "odoodjango.wsgi:application", "--bind", "0.0.0.0:8000"]
+    networks:
+      - shared_network
 
   adminer:
     image: adminer
@@ -37,6 +41,8 @@ services:
     restart: always
     ports:
       - "8080:8080"
+    networks:
+      - shared_network
 
   nginx:
     build:
